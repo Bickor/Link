@@ -1,1 +1,3 @@
 __pycache__/
+migrations/
+backend/db.sqlite3
