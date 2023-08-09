@@ -27,3 +27,12 @@ python3 manage.py makesuperuser
 
 
 ## Run the entire appplication.
+
+## TODO
+[ ] Create frontend
+[ ] Get endpoints from frontend
+[ ] Add correct fields to person object
+[ ] Migrate db to postgress
+[ ] Store in external db
+[ ] Deploy
+[ ] Add cicd
