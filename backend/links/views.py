@@ -13,7 +13,12 @@ def add (request):
     name = request.POST["name"]
     company = request.POST["company"]
     notes = request.POST["notes"]
-    
+    if (name == ""):
+        name = "NA"
+    if (company == ""):
+        company = "NA"
+    if (notes == ""):
+        notes = "NA"
     person = Person(name=name, company=company, notes=notes)
     person.save()
     return redirect("index")
