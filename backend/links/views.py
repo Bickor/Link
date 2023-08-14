@@ -4,10 +4,12 @@ from django.views.decorators.http import require_http_methods
 
 from .models import Person
 
+# Loads the index page, base.html
 def index(request):
     persons = Person.objects.all()
     return render(request, "base.html", {"person_list": persons})
 
+# Add a new person into the database
 @require_http_methods(["POST"])
 def add (request):
     name = request.POST["name"]
@@ -23,10 +25,12 @@ def add (request):
     person.save()
     return redirect("index")
 
+# Send you to the page to update a person's information
 def updatePage(request, person_id):
     person = Person.objects.get(id=person_id)
     return render(request, "update.html", {"person": person})
 
+# Update a person's information from the update page
 @require_http_methods(["POST"])
 def update(request, person_id):
     person = Person.objects.get(id=person_id)
@@ -47,6 +51,7 @@ def update(request, person_id):
     person.save()
     return redirect("index")
 
+# Delete a person from the database
 def delete(request, person_id):
     person = Person.objects.get(id=person_id)
     person.delete()
