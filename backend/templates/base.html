@@ -20,6 +20,14 @@
                 <label>Person</label>
                 <input type="text" name="name" placeholder="Enter Person..."><br>
             </div>
+            <div class="field">
+                <label>Company</label>
+                <input type="text" name="company" placeholder="Enter Company..."><br>
+            </div>
+            <div class="field">
+                <label>Notes</label>
+                <input type="text" name="notes" placeholder="Enter Notes..."><br>
+            </div>
             <button class="ui blue button" type="submit">Add</button>
         </form>
 
@@ -27,13 +35,17 @@
 
         {% for person in person_list %}
         <div class="ui segment">
-            <p class="ui big header">{{ person.id }} | {{ person.name }}</p>
+            <p class="ui big header">{{ person.id }} | {{ person.name }} | {{ person.company }} </p>
+            
+            {% if person.notes != "NA" %}
+            <p>{{ person.notes }}</p>
+            {% endif %}
 
-            {% if person.company == "NA" %}
+            <!-- {% if person.company == "NA" %}
             <span class="ui gray label">Not Complete</span>
             {% else %}
             <span class="ui green label"> {{ person.company }} </span>
-            {% endif %}
+            {% endif %} -->
 
             <a class="ui blue button" href="/update/{{ person.id }}">Update</a>
             <a class="ui red button" href="/delete/{{ person.id }}">Delete</a>
