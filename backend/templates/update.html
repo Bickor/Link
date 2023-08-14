@@ -14,16 +14,22 @@
     <div style="margin-top: 50px;" class="ui container">
         <h1 class="ui center aligned header">Update</h1>
 
-        <p>This is the update page!</p>
-
-        <!-- <form class="ui form" action="/add" method="post">
+        <form class="ui form" action="/update/{{ person.id }}/" method="post">
             {% csrf_token %}
             <div class="field">
                 <label>Person</label>
-                <input type="text" name="name" placeholder="Enter Person..."><br>
+                <input type="text" name="name" placeholder="{{ person.name }}"><br>
             </div>
-            <button class="ui blue button" type="submit">Add</button>
-        </form> -->
+            <div class="field">
+                <label>Company</label>
+                <input type="text" name="company" placeholder="{{ person.company }}"><br>
+            </div>
+            <div class="field">
+                <label>Notes</label>
+                <input type="text" name="notes" placeholder="{{ person.notes }}"><br>
+            </div>
+            <button class="ui blue button" type="submit">Update</button>
+        </form>
 
         <hr>
     </div>

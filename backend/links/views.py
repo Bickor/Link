@@ -23,9 +23,27 @@ def add (request):
     person.save()
     return redirect("index")
 
+def updatePage(request, person_id):
+    person = Person.objects.get(id=person_id)
+    return render(request, "update.html", {"person": person})
+
+@require_http_methods(["POST"])
 def update(request, person_id):
     person = Person.objects.get(id=person_id)
-    person.company = "Microsoft"
+    
+    name = request.POST["name"]
+    company = request.POST["company"]
+    notes = request.POST["notes"]
+    if (name == ""):
+        name = person.name
+    if (company == ""):
+        company = person.company
+    if (notes == ""):
+        notes = person.notes
+
+    person.name = name
+    person.company = company
+    person.notes = notes
     person.save()
     return redirect("index")
 
