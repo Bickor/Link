@@ -1,0 +1,13 @@
+<tr id="person-{{.Index}}">
+    <form hx-post="/update" hx-target="#person-{{.Index}}" hx-swap="outerHTML">
+        <input type="hidden" name="index" value="{{.Index}}">
+        <td><input type="text" name="name" value="{{.Person.Name}}" required></td>
+        <td><input type="text" name="met_at" value="{{.Person.MetAt}}" required></td>
+        <td><input type="text" name="works_at" value="{{.Person.WorksAt}}" required></td>
+        <td><input type="text" name="fact" value="{{.Person.Fact}}" required></td>
+        <td>
+            <button type="submit">Save</button>
+        </td>
+    </form>
+</tr>
+

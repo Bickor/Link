@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Links</title>
+    <script src="https://unpkg.com/htmx.org@1.9.2"></script>
+</head>
+<body>
+    <h1>Links - People You've Met</h1>
+
+    <form hx-post="/add" hx-target="#people-list" hx-swap="beforeend">
+        <input type="text" name="name" placeholder="Name" required>
+        <input type="text" name="met_at" placeholder="Met At" required>
+        <input type="text" name="works_at" placeholder="Works At" required>
+        <input type="text" name="fact" placeholder="Fact" required>
+        <button type="submit">Add</button>
+    </form>
+
+    <hr>
+
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Met At</th>
+                <th>Works At</th>
+                <th>Fact</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody id="people-list">
+            {{range $i, $p := .}}
+                {{template "person_row.html" dict "Index" $i "Person" $p}}
+            {{end}}
+        </tbody>
+    </table>
+</body>
+</html>
+

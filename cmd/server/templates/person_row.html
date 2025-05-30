@@ -1,0 +1,23 @@
+<tr id="person-{{.Index}}">
+    <td>{{.Person.Name}}</td>
+    <td>{{.Person.MetAt}}</td>
+    <td>{{.Person.WorksAt}}</td>
+    <td>{{.Person.Fact}}</td>
+    <td>
+        <button 
+            hx-post="/edit" 
+            hx-vals='{"index": "{{.Index}}"}'
+            hx-target="#person-{{.Index}}"
+            hx-swap="outerHTML">
+            Edit
+        </button>
+        <button 
+            hx-post="/delete"
+            hx-vals='{"index": "{{.Index}}"}'
+            hx-target="#person-{{.Index}}"
+            hx-swap="outerHTML">
+            Delete
+        </button>
+    </td>
+</tr>
+
