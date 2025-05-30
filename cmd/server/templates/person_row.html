@@ -1,23 +1,24 @@
-<tr id="person-{{.Index}}">
-    <td>{{.Person.Name}}</td>
-    <td>{{.Person.MetAt}}</td>
-    <td>{{.Person.WorksAt}}</td>
-    <td>{{.Person.Fact}}</td>
-    <td>
+<tr id="person-{{.Index}}" class="border-t hover:bg-gray-100">
+    <td class="p-2">{{.Person.Name}}</td>
+    <td class="p-2">{{.Person.MetAt}}</td>
+    <td class="p-2">{{.Person.WorksAt}}</td>
+    <td class="p-2">{{.Person.Fact}}</td>
+    <td class="p-2">
         <button 
-            hx-post="/edit" 
-            hx-vals='{"index": "{{.Index}}"}'
+            hx-get="/edit?index={{.Index}}"
             hx-target="#person-{{.Index}}"
-            hx-swap="outerHTML">
-            Edit
-        </button>
-        <button 
-            hx-post="/delete"
-            hx-vals='{"index": "{{.Index}}"}'
-            hx-target="#person-{{.Index}}"
-            hx-swap="outerHTML">
-            Delete
-        </button>
+            hx-swap="outerHTML"
+            class="text-blue-600 hover:underline text-sm"
+        >Edit</button>
+        <form 
+            hx-post="/delete" 
+            hx-target="#person-{{.Index}}" 
+            hx-swap="outerHTML"
+            style="display:inline"
+        >
+            <input type="hidden" name="index" value="{{.Index}}">
+            <button class="text-red-600 hover:underline text-sm">Delete</button>
+        </form>
     </td>
 </tr>
 

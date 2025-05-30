@@ -4,36 +4,43 @@
     <meta charset="UTF-8">
     <title>Links</title>
     <script src="https://unpkg.com/htmx.org@1.9.2"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-    <h1>Links - People You've Met</h1>
+<body class="bg-gray-100 text-gray-800 font-sans min-h-screen flex flex-col items-center p-6">
 
-    <form hx-post="/add" hx-target="#people-list" hx-swap="beforeend">
-        <input type="text" name="name" placeholder="Name" required>
-        <input type="text" name="met_at" placeholder="Met At" required>
-        <input type="text" name="works_at" placeholder="Works At" required>
-        <input type="text" name="fact" placeholder="Fact" required>
-        <button type="submit">Add</button>
-    </form>
+    <div class="w-full max-w-4xl bg-white shadow-md rounded-lg p-6">
+        <h1 class="text-3xl font-bold mb-6 text-center">Links – People I've Met</h1>
 
-    <hr>
+        <!-- Add Person Form -->
+        <form hx-post="/add" hx-target="#people-list" hx-swap="beforeend" class="grid grid-cols-4 gap-4 mb-6">
+            <input name="name" class="border p-2 rounded" placeholder="Name" required>
+            <input name="met_at" class="border p-2 rounded" placeholder="Where you met them" required>
+            <input name="works_at" class="border p-2 rounded" placeholder="Where they work" required>
+            <input name="fact" class="border p-2 rounded" placeholder="A fact about them" required>
+            <button type="submit" class="col-span-4 bg-blue-500 hover:bg-blue-600 text-white p-2 rounded mt-2">
+                Add Person
+            </button>
+        </form>
 
-    <table border="1">
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th>Met At</th>
-                <th>Works At</th>
-                <th>Fact</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody id="people-list">
-            {{range $i, $p := .}}
-                {{template "person_row.html" dict "Index" $i "Person" $p}}
-            {{end}}
-        </tbody>
-    </table>
+        <!-- Table -->
+        <table class="min-w-full table-auto border-collapse">
+            <thead>
+                <tr class="bg-gray-200 text-left text-sm font-medium text-gray-700">
+                    <th class="p-2">Name</th>
+                    <th class="p-2">Met At</th>
+                    <th class="p-2">Works At</th>
+                    <th class="p-2">Fact</th>
+                    <th class="p-2 text-center">Actions</th>
+                </tr>
+            </thead>
+            <tbody id="people-list" class="text-sm">
+                {{range $index, $person := .}}
+                    {{ template "person_row.html" dict "Index" $index "Person" $person }}
+                {{end}}
+            </tbody>
+        </table>
+    </div>
+
 </body>
 </html>
 

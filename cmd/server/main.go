@@ -28,6 +28,7 @@ func main() {
 	http.HandleFunc("/edit", handleEditForm)
 	http.HandleFunc("/update", handleUpdate)
 	http.HandleFunc("/delete", handleDelete)
+	http.HandleFunc("/row", getPersonRowHandler)
 
 	log.Println("Server started at http://localhost:8080")
 	log.Fatal(http.ListenAndServe(":8080", nil))
@@ -144,4 +145,22 @@ func loadTemplates() *template.Template {
 		panic(err)
 	}
 	return parsed
+}
+
+func getPersonRowHandler(w http.ResponseWriter, r *http.Request) {
+	indexStr := r.URL.Query().Get("index")
+	index, err := strconv.Atoi(indexStr)
+	if err != nil || index < 0 || index >= len(people) {
+		http.Error(w, "Invalid index", http.StatusBadRequest)
+		return
+	}
+
+	err = templates.ExecuteTemplate(w, "person_row.html", map[string]interface{}{
+		"Index":  index,
+		"Person": people[index],
+	})
+	if err != nil {
+		log.Println("template error:", err)
+		http.Error(w, "Template error", http.StatusInternalServerError)
+	}
 }
